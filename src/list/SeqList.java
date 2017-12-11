@@ -5,11 +5,9 @@ package list;
  */
 public class SeqList implements Collection {
 
-    private int maxsize;
-    private int dataSize;
+    private int maxsize = 0;
+    private int dataSize = 0;
     private int a[];
-    private final int ERROR = -1;
-    private final int OK = 0;
 
     public SeqList(int maxsize) {
         this.maxsize = maxsize;
