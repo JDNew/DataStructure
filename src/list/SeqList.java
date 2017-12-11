@@ -3,15 +3,15 @@ package list;
 /**
  * 顺序存储列表
  */
-public class SeqList implements Collection{
+public class SeqList implements Collection {
 
     private int maxsize;
     private int dataSize;
-    int a[];
+    private int a[];
     private final int ERROR = -1;
     private final int OK = 0;
 
-    public SeqList(int maxsize){
+    public SeqList(int maxsize) {
         this.maxsize = maxsize;
         this.dataSize = 0;
 
@@ -20,20 +20,26 @@ public class SeqList implements Collection{
 
     @Override
     public void remove(int position) {
-        if(position > maxsize || position < 0){
+        if (position > maxsize || position < 0) {
             System.out.println("位置错误");
+            return;
+        } else if (dataSize == 0) {
+            System.out.println("没有数据");
+            return;
         }
 
-        for (int i = position; i < maxsize; i++) {
-
-
+        for (int i = position; i < dataSize; i++) {
+            a[i] = a[i + 1];
         }
+
+        dataSize--;
     }
 
     @Override
     public void add(int num) {
-        if(dataSize == maxsize){
+        if (dataSize == maxsize) {
             System.out.println("已越界");
+            return;
         }
 
         a[dataSize] = num;
@@ -43,13 +49,15 @@ public class SeqList implements Collection{
 
     @Override
     public void add(int num, int position) {
-        if(dataSize == maxsize){
+        if (dataSize == maxsize) {
             System.out.println("已越界");
-        }else  if(position < 0 || position > maxsize){
+            return;
+        } else if (position < 0 || position > maxsize) {
             System.out.println("位置错误");
+            return;
         }
 
-        for(int i = maxsize ; i > position ; --i){
+        for (int i = maxsize; i > position; --i) {
             a[maxsize] = a[i];
         }
         a[position] = num;
@@ -60,11 +68,12 @@ public class SeqList implements Collection{
 
     @Override
     public int get(int position) {
-       if(position < 0 || position > maxsize){
-           System.out.println("位置错误");
-       }
+        if (position < 0 || position > maxsize) {
+            System.out.println("位置错误");
+            return -1;
+        }
 
-       return a[position];
+        return a[position];
     }
 
     @Override
